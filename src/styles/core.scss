@@ -13,12 +13,21 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	background-color: $midnight-green;
-	color: #ffffff;
+	background-color: $charleston-green;
+	color: $spanish-grey;
 }
 
 *,
 *:before,
 *:after {
 	box-sizing: inherit;
+}
+
+.no-padding{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+h1{
+	margin: 0;
 }

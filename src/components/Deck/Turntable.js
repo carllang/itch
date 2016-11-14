@@ -1,5 +1,6 @@
 import React from 'react';
 import Transport from './Transport';
+import Mixer from '../Mixer';
 import './Turntable.scss';
 
 class Turntable extends React.Component {
@@ -43,46 +44,49 @@ class Turntable extends React.Component {
 	}
 
 	handleDrop (e) {
-		e.preventDefault()
-		e.stopPropagation()
-		let _this = this;
-		let files = e.dataTransfer.files;
+		e.preventDefault();
+		e.stopPropagation();
 
-		//this.refs.canvas.style.display = 'block';
-		for (let i = 0; i < files.length; i++) {
-			let file = files[i];
-			let reader = new FileReader();
-			reader.addEventListener('load', function(e) {
-				var data = e.target.result;
-				_this.deckARecord = e.target.result;
-				console.log('Yes you dropped it ', file.name);
+		let files = e.dataTransfer.files;
+		let _this = this;
+
+		this.props.webaudio.loadTrack(files, this.props.deckName, function(result) {
+			if (result){
 				_this.setState({
-					trackName: file.name
+					trackName: result.name + ' ' + (result.size/1000000).toFixed(2) + 'mb'
 				});
-			});
-			reader.readAsArrayBuffer(file)
-		}
+			}else{
+				_this.setState({
+					trackName: result.error
+				});
+			}
+		});
 	}
 
-	componentDidMount() {
+	componentDidMount () {
 		this.drawDisk();
 		// When the component is mounted, grab a reference and add a DOM listener;
 		this.refs.canvas.addEventListener("drop", this.handleDrop);
 		this.refs.canvas.addEventListener("dragover", this.handleDragOver);
 	}
 
-	componentWillUnmount() {
+	componentWillUnmount () {
 		// Make sure to remove the DOM listener when the component is unmounted
 		this.refs.canvas.removeEventListener("drop", this.handleDrop);
 		this.refs.canvas.removeEventListener("dragover", this.handleDragOver);
 	}
 
+	componentDidUpdate () {
+		this.drawDisk();
+	}
+
 	render () {
+		console.log()
 		return (
 			<div>
-				<h3>{this.state.trackName}</h3>
-				<audio ref="htmlaudio" src=""></audio>
-				<canvas ref="canvas" id={this.props.name} style={{width:300, height:238, backgroundColor: '#546A7B'}} width="300px" height="238px"></canvas>
+				<h4>{this.state.trackName}</h4>
+				<audio ref="htmlaudio" id={this.props.deckName}></audio>
+				<canvas ref="canvas" id={this.props.deckName} style={{width:300, height:238, backgroundColor: '#404E5C'}} width="300px" height="238px"></canvas>
 				<Transport {...this.props} />
 			</div>
 		);
@@ -91,7 +95,7 @@ class Turntable extends React.Component {
 
 
 Turntable.propTypes = {
-    name: React.PropTypes.string.isRequired
+    deckName: React.PropTypes.string.isRequired
 };
 
 export default Turntable;

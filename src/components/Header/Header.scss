@@ -1,4 +1,10 @@
+@import '../../styles/variables';
 .route--active {
   font-weight: bold;
   text-decoration: underline;
+}
+
+nav{
+	height: 40px;
+	background-color: $licorice;
 }

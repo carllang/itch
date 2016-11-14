@@ -4,16 +4,25 @@ class PlayButton extends React.Component {
 
 	constructor (props) {
 		super (props);
-		this.handleClick = this.handleClick.bind(this);
+		this.togglePlayPause = this.togglePlayPause.bind(this);
 	}
 
-	handleClick () {
-		this.props.track.play(this.props.name);
+	// handleClick () {
+	// 	this.props.webaudio.togglePlayPause(document.querySelector('#' + this.props.deckName));
+	// }
+
+	togglePlayPause () {
+		let audioElement = document.querySelector('#' + this.props.deckName)
+		if (audioElement.paused){
+			audioElement.play();
+		}else{
+			audioElement.pause();
+		}
 	}
 
 	render () {
 		return (
-			<button onClick={this.handleClick}>
+			<button onClick={this.togglePlayPause}>
 				<span className="play button glyphicon glyphicon-play" ></span>
 			</button>
 		);

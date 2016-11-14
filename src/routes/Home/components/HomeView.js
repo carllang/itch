@@ -1,6 +1,7 @@
 import React from 'react'
 import './HomeView.scss'
 import Turntable from '../../../components/Deck'
+import Mixer from '../../../components/Mixer';
 import WebAudio from '../../../webAudio';
 
 const webAudio = new WebAudio();
@@ -11,22 +12,21 @@ const decks = [{
 					name: 'deckB'
 				}];
 
-//loadtrack should return something
-let trackA = webAudio.loadTrack('static/sound1.wav', decks[0].name);
-
-let trackB = webAudio.loadTrack('static/Noisia-mantra.mp3', decks[1].name);
-
 
 export const HomeView = () => (
 	<div className="container-fluid">
 		<div className="row">
-			<div className="col-md-6">
+			<div className="col-md-4">
 				<h4>Deck A</h4>
-				<Turntable name="deckA" track={webAudio} />
+				<Turntable deckName={decks[0].name} webaudio={webAudio} />
 			</div>
-			<div className="col-md-6">
+			<div className="col-md-4">
+				<h4>Mixer</h4>
+				<Mixer decks={decks} webaudio={webAudio} />
+			</div>
+			<div className="col-md-4">
 				<h4>Deck B</h4>
-				<Turntable name="deckB" track={webAudio} />
+				<Turntable deckName={decks[1].name} webaudio={webAudio} />
 			</div>
 		</div>
 

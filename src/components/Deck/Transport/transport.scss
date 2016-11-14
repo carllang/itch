@@ -1,4 +1,10 @@
-.button{
-	width: 50px;
-	height:20px
+@import '../../../styles/variables';
+button{
+	width: 100px;
+	height:40px;
+	background-color: $davys-grey;
+	padding: 0px !important;
+	&:hover{
+		background-color: $metallic-seaweed;
+	}
 }

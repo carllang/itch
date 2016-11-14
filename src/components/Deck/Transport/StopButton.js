@@ -8,7 +8,7 @@ class StopButton extends React.Component {
 	}
 
 	handleClick () {
-		this.props.track.stop(this.props.name);
+		//this.props.webaudio.stop(this.props.deckName, document.querySelector('#' + this.props.deckName));
 	}
 
 	render () {
