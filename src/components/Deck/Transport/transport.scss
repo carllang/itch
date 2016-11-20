@@ -2,9 +2,10 @@
 button{
 	width: 100px;
 	height:40px;
-	background-color: $davys-grey;
+	background-color: $licorice;
 	padding: 0px !important;
+	border: none;
 	&:hover{
-		background-color: $metallic-seaweed;
+		background-color: $outer-space;
 	}
 }

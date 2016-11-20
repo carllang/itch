@@ -13,8 +13,81 @@ body {
 	margin: 0;
 	padding: 0;
 	height: 100%;
-	background-color: $charleston-green;
+	//background-color: $charleston-green;
 	color: $spanish-grey;
+
+
+	background: $licorice; /* Old browsers */
+	background: -moz-linear-gradient(top,  $licorice 0%, $outer-space 50%, $licorice 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  $licorice 0%,$outer-space 50%, $licorice 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, $licorice 0%,$outer-space 50%, $licorice 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e5799', endColorstr='#7db9e8',GradientType=0 ); /* IE6-9 */
+
+}
+
+.Knob {
+  width: 125px;
+  height: 125px;
+  background: #eee;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.Knob-label {
+  flex: none;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.Knob-value {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  text-align: center;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+.Knob-spinner {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgb(243, 243, 243);
+  border: 1px solid rgb(232, 232, 232);
+  border-radius: 50%;
+  z-index: 1;
+  align-items: center;
+  justify-content: flex-start;
+
+  &:before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    margin: 4px;
+    border-radius: 50%;
+    background: #000;
+  }
+}
+
+
+.turntable {
+	width:300;
+	height:238;
+	background-color: $licorice;
 }
 
 *,

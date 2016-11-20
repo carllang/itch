@@ -3,26 +3,32 @@ class WebAudio {
 	constructor () {
 		AudioContext = AudioContext||webkitAudioContext;
 		this.audioContext = new AudioContext();
-		this.sourceBuffer = [{
-							'deckA': null,
-							'deckB': null,
-							}];
-		this.getMediaElementSource = this.getMediaElementSource.bind(this);
-	}
 
-	getContext () {
-		return this.audioContext;
-	}
+		/*TODO Abstract this */
+		this.gainNode = {
+			'deckA': this.audioContext.createGain(),
+			'deckB': this.audioContext.createGain()
+		};
 
-	getNewBufferSource () {
-		return this.context.createBufferSource();
-	}
+		this.crossFadeGainNode = {
+			'deckA': this.audioContext.createGain(),
+			'deckB': this.audioContext.createGain()
+		};
 
-	getMediaElementSource (audioElement) {
-		if (!this.mediaElementSource){
-			this.mediaElementSource = this.audioContext.createMediaElementSource(audioElement);
-		}
-		return this.mediaElementSource;
+		this.hiPassFilterNode = {
+			'deckA': this.audioContext.createBiquadFilter(),
+			'deckB': this.audioContext.createBiquadFilter()
+		};
+		this.hiPassFilterNode['deckA'].type = "highshelf";
+		this.hiPassFilterNode['deckA'] = 3200.0;
+		//this.hiPassFilterNode['deckA'].gain.value = 0.0;
+		this.hiPassFilterNode['deckB'].type = "highshelf";
+		this.hiPassFilterNode['deckB'] = 3200.0;
+		//this.hiPassFilterNode['deckB'].gain.value = 0.0;
+		/*END TODO Abstract this */
+
+
+		this.masterGain = this.audioContext.createGain();
 	}
 
 	loadTrack (files, deckName, callback) {
@@ -32,35 +38,19 @@ class WebAudio {
 			let reader = new FileReader();
 			reader.readAsArrayBuffer(file);
 			reader.addEventListener('loadend', function(buffer){
-				let audio = document.querySelector('#' + deckName)
+				let audio = document.querySelector('#' + deckName);
 				let objUrl = URL.createObjectURL(file);
 				audio.src = objUrl;
-				let source = _this.getMediaElementSource(audio);
-				source.connect(_this.audioContext.destination);
+				let source = _this.audioContext.createMediaElementSource(audio)
+				//console.log('Deck name', deckName);
+				source.connect(_this.gainNode[deckName]);
+				_this.gainNode[deckName].connect(_this.crossFadeGainNode[deckName]);
+				_this.crossFadeGainNode[deckName].connect(_this.masterGain);
+				_this.masterGain.connect(_this.audioContext.destination);
 				callback(file);
 			});
 		}
 	}
-	// loadTrack (url, deck) {
-	// 	let request = new XMLHttpRequest();
-	// 	let _this = this;
-	// 	request.open("GET", url, true);
-	// 	request.responseType = "arraybuffer";
-	// 	request.onload = function() {
-	// 		_this.audioContext.decodeAudioData( request.response, function(buffer) {
-	//
-	// 			_this.buffer = buffer;
-	// 			//console.log(_this.sourceBuffer[deck]);
-	// 		});
-	// 	}
-	// 	request.send();
-	// 	request.addEventListener("load", this.transferComplete());
-	// }
-	//
-	// transferComplete () {
-	//
-	// 	//this.dispatch(enablePlayButton());
-	// }
 }
 
 export default WebAudio;

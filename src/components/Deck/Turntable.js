@@ -1,6 +1,5 @@
 import React from 'react';
 import Transport from './Transport';
-import Mixer from '../Mixer';
 import './Turntable.scss';
 
 class Turntable extends React.Component {
@@ -86,7 +85,7 @@ class Turntable extends React.Component {
 			<div>
 				<h4>{this.state.trackName}</h4>
 				<audio ref="htmlaudio" id={this.props.deckName}></audio>
-				<canvas ref="canvas" id={this.props.deckName} style={{width:300, height:238, backgroundColor: '#404E5C'}} width="300px" height="238px"></canvas>
+				<canvas ref="canvas" id={this.props.deckName} className="turntable" width="300px" height="238px"></canvas>
 				<Transport {...this.props} />
 			</div>
 		);
