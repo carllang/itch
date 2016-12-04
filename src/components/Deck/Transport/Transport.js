@@ -14,14 +14,6 @@ class Transport extends React.Component {
 			<div className="row">
 				<div className="col-md-12">
 					<PlayButton {...this.props}/>
-
-					{/*
-					<StopButton {...this.props} />
-					<RewindButton />
-					<ForwardButton />
-					<SeekForward />
-					<SeekBackward />
-					<Cue />*/}
 				</div>
 			</div>
 		);

@@ -1,10 +1,23 @@
+import Filter from './Filter';
+import WebMidi from 'webMIDI';
+
+
 class WebAudio {
 
 	constructor () {
 		AudioContext = AudioContext||webkitAudioContext;
 		this.audioContext = new AudioContext();
 
-		/*TODO Abstract this */
+		WebMidi.enable(function (err) {
+
+			if (err) {
+				console.log("WebMidi could not be enabled.", err);
+			} else {
+				console.log("WebMidi enabled!");
+			}
+
+		});
+
 		this.gainNode = {
 			'deckA': this.audioContext.createGain(),
 			'deckB': this.audioContext.createGain()
@@ -15,18 +28,18 @@ class WebAudio {
 			'deckB': this.audioContext.createGain()
 		};
 
-		this.hiPassFilterNode = {
-			'deckA': this.audioContext.createBiquadFilter(),
-			'deckB': this.audioContext.createBiquadFilter()
+		this.filters = {
+			deckA : {
+				hp: new Filter('highpass', 100.0, 0, 0, 'deckA', this.audioContext),
+				bp: new Filter('bandpass', 600.0, 0, 0.5, 'deckA', this.audioContext),
+				lp: new Filter('lowpass', 10000.0, 0, 0, 'deckA', this.audioContext)
+			},
+			deckB : {
+				hp: new Filter('highpass', 100.0, 0, 0, 'deckB', this.audioContext),
+				bp: new Filter('bandpass', 600.0, 0, 0.5, 'deckB', this.audioContext),
+				lp: new Filter('lowpass', 10000.0, 0, 0, 'deckB', this.audioContext)
+			}
 		};
-		this.hiPassFilterNode['deckA'].type = "highshelf";
-		this.hiPassFilterNode['deckA'] = 3200.0;
-		//this.hiPassFilterNode['deckA'].gain.value = 0.0;
-		this.hiPassFilterNode['deckB'].type = "highshelf";
-		this.hiPassFilterNode['deckB'] = 3200.0;
-		//this.hiPassFilterNode['deckB'].gain.value = 0.0;
-		/*END TODO Abstract this */
-
 
 		this.masterGain = this.audioContext.createGain();
 	}
@@ -38,12 +51,15 @@ class WebAudio {
 			let reader = new FileReader();
 			reader.readAsArrayBuffer(file);
 			reader.addEventListener('loadend', function(buffer){
+				document.querySelector('#' + deckName).src = null;
 				let audio = document.querySelector('#' + deckName);
 				let objUrl = URL.createObjectURL(file);
 				audio.src = objUrl;
 				let source = _this.audioContext.createMediaElementSource(audio)
-				//console.log('Deck name', deckName);
-				source.connect(_this.gainNode[deckName]);
+				source.connect(_this.filters[deckName]['hp'].filter);
+				_this.filters[deckName]['hp'].filter.connect(_this.filters[deckName]['bp'].filter);
+				_this.filters[deckName]['bp'].filter.connect(_this.filters[deckName]['lp'].filter);
+				_this.filters[deckName]['lp'].filter.connect(_this.gainNode[deckName]);
 				_this.gainNode[deckName].connect(_this.crossFadeGainNode[deckName]);
 				_this.crossFadeGainNode[deckName].connect(_this.masterGain);
 				_this.masterGain.connect(_this.audioContext.destination);

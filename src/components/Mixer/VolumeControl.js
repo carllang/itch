@@ -9,9 +9,7 @@ class VolumeControl extends React.Component {
 	}
 
 	changeVolume (event) {
-		//this.props.webaudio.gainNode[this.props.deck].gain.cancelScheduledValues( 0 );
 		this.props.webaudio.gainNode[this.props.deck].gain.value =  event.target.value;
-		//this.props.webaudio.gainNode[this.props.deck].gain.setValueAtTime(event.target.value,0);
 	}
 
 	render () {

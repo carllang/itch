@@ -21,7 +21,7 @@ export const HomeView = () => (
 				<Turntable deckName={decks[0].name} webaudio={webAudio} />
 			</div>
 			<div className="col-md-4">
-				<h4>Mixer</h4>
+				<h1> __i t c h__ </h1>
 				<Mixer decks={decks} webaudio={webAudio} />
 			</div>
 			<div className="col-md-4">

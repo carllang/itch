@@ -6,6 +6,14 @@ button{
 	padding: 0px !important;
 	border: none;
 	&:hover{
-		background-color: $outer-space;
+		background-color: #000000;
+	}
+
+	.active{
+		color: #228DFF;
+		text-shadow: 0px 0px 20px #228DFF, 0px 0px 20px #228DFF;
+	}
+	&:focus{
+		outline: 0;
 	}
 }

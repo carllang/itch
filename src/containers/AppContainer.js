@@ -12,6 +12,17 @@ class AppContainer extends Component {
     return false
   }
 
+  componentDidMount () {
+	//   function preventDefaultExcept(predicates) {
+	//   return function (e) {
+	//     var passEvery = predicates.every(function (predicate) { return predicate(e); })
+	//     if (!passEvery) {
+	//       e.preventDefault();
+	//     }
+	//   };
+	// }
+  }
+
   render () {
     const { routes, store } = this.props
 

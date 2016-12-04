@@ -4,7 +4,7 @@ import './Header.scss'
 
 export const Header = () => (
 <div>
-<nav><h1>itch</h1></nav>
+<nav><h1>...</h1></nav>
 
 {/*
 
