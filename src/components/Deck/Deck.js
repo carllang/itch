@@ -1,20 +1,27 @@
 import React from 'react';
 import Transport from './Transport';
-import './Turntable.scss';
+import './Deck.scss';
 
-class Turntable extends React.Component {
+class Deck extends React.Component {
 
 	constructor (props) {
 		super (props);
+
 		this.state = {
-			trackName: 'drop a track'
+			trackName: 'drop a track',
+			deckName: this.props.deckName
 		};
+
+		this.deck = {
+			gain: 1.0,
+			currentPlaybackRate: 1.0,
+			lastBufferTime: 0.0,
+			isPlaying: false,
+			stopTime: 0.0
+		};
+
 		this.handleDrop = this.handleDrop.bind(this);
 		this.handleDragOver = this.handleDragOver.bind(this);
-		this.deck = {
-			name: this.props.deckName,
-			buffer: null
-		};
 	}
 
 	drawDisk () {
@@ -47,6 +54,11 @@ class Turntable extends React.Component {
 		e.stopPropagation();
 	}
 
+	handleDropBody (e){
+		e.preventDefault();
+		e.stopPropagation();
+	}
+
 	handleDrop (e) {
 		e.preventDefault();
 		e.stopPropagation();
@@ -65,47 +77,32 @@ class Turntable extends React.Component {
 				});
 			}
 		});
-
 	}
 
 	loadTrack (files, deckName, callback) {
 		let _this = this;
-		for (let i = 0; i < files.length; i++) {
-			let file = files[i];
+
+			let file = files[0];
 			let reader = new FileReader();
-			// reader.readAsArrayBuffer(file);
-			// reader.addEventListener('loadend', function(buffer){
-			//
-			// 	document.querySelector('#' + deckName).src = null;
-			//
-			// 	let audio = document.querySelector('#' + deckName);
-			// 	let objUrl = URL.createObjectURL(file);
-			// 	audio.src = objUrl;
-			// 	let source = _this.audioContext.createMediaElementSource(audio);
-			// 	source.connect(_this.filters[deckName]['hp'].filter);
-			// 	_this.filters[deckName]['hp'].filter.connect(_this.filters[deckName]['bp'].filter);
-			// 	_this.filters[deckName]['bp'].filter.connect(_this.filters[deckName]['lp'].filter);
-			// 	_this.filters[deckName]['lp'].filter.connect(_this.gainNode[deckName]);
-			// 	_this.gainNode[deckName].connect(_this.crossFadeGainNode[deckName]);
-			// 	_this.crossFadeGainNode[deckName].connect(_this.masterGain);
-			// 	_this.masterGain.connect(_this.analyser);
-			// 	_this.analyser.connect(_this.audioContext.destination);
-			// 	callback(file);
-			//
-			// });
+
+			reader.onloadstart = function (event) {
+				_this.setState({
+					trackName: 'loading...'
+				});
+			};
 
 			reader.onload = function (event) {
 		  		_this.props.webaudio.audioContext.decodeAudioData( event.target.result, function(buffer) {
 					// if (thisTrack.isPlaying)
 					// 	thisTrack.togglePlayback();
-					_this.deck.buffer = buffer;
+					_this.props.webaudio.source[_this.props.deckName].buffer = buffer;
 					callback(file);
 					//thisTrack.postLoadTasks();
 		  		}, function(){alert("error loading!");} );
 
 		  	};
 			reader.readAsArrayBuffer(file);
-		}
+
 	}
 
 	componentDidMount () {
@@ -127,19 +124,19 @@ class Turntable extends React.Component {
 
 	render () {
 		return (
-			<div>
+			<div className="droppable">
 				<h4>{this.state.trackName}</h4>
 				<audio ref="htmlaudio" id={this.props.deckName}></audio>
-				<canvas ref="canvas" id={this.props.deckName} className="turntable" width="300px" height="238px"></canvas>
-				<Transport {...this.props} />
+				<canvas ref="canvas" id={this.props.deckName} className="Deck" width="300px" height="238px"></canvas>
+				<Transport {...this.props} deck={this.deck}/>
 			</div>
 		);
 	}
 }
 
 
-Turntable.propTypes = {
+Deck.propTypes = {
     deckName: React.PropTypes.string.isRequired
 };
 
-export default Turntable;
+export default Deck;

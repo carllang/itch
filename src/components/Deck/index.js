@@ -1,3 +1,3 @@
-import Turntable from './Turntable.js';
+import Deck from './Deck.js';
 
-export default Turntable;
+export default Deck;
