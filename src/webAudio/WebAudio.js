@@ -1,5 +1,5 @@
 import Filter from './Filter';
-import WebMidi from 'webMIDI';
+//import WebMidi from 'webMIDI';
 
 
 class WebAudio {
