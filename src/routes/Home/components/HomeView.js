@@ -1,6 +1,6 @@
 import React from 'react'
 import './HomeView.scss'
-import Turntable from '../../../components/Deck'
+import Deck from '../../../components/Deck'
 import Mixer from '../../../components/Mixer';
 import WebAudio from '../../../webAudio';
 
@@ -17,16 +17,14 @@ export const HomeView = () => (
 	<div className="container-fluid">
 		<div className="row">
 			<div className="col-md-4">
-				<h4>Deck A</h4>
-				<Turntable deckName={decks[0].name} webaudio={webAudio} />
+				<Deck deckName={decks[0].name} webaudio={webAudio} />
 			</div>
 			<div className="col-md-4">
 				<h1> __i t c h__ </h1>
 				<Mixer decks={decks} webaudio={webAudio} />
 			</div>
 			<div className="col-md-4">
-				<h4>Deck B</h4>
-				<Turntable deckName={decks[1].name} webaudio={webAudio} />
+				<Deck deckName={decks[1].name} webaudio={webAudio} />
 			</div>
 		</div>
 

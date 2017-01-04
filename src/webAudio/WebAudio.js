@@ -5,17 +5,17 @@ import Filter from './Filter';
 class WebAudio {
 
 	constructor () {
-		AudioContext = AudioContext||webkitAudioContext;
+		AudioContext = AudioContext || webkitAudioContext;
 		this.audioContext = new AudioContext();
 
 		this.gainNode = {
-			'deckA': this.audioContext.createGain(),
-			'deckB': this.audioContext.createGain()
+			deckA: this.audioContext.createGain(),
+			deckB: this.audioContext.createGain()
 		};
 
 		this.crossFadeGainNode = {
-			'deckA': this.audioContext.createGain(),
-			'deckB': this.audioContext.createGain()
+			deckA: this.audioContext.createGain(),
+			deckB: this.audioContext.createGain()
 		};
 
 		this.filters = {
@@ -31,34 +31,16 @@ class WebAudio {
 			}
 		};
 
+		this.source = {
+			deckA: this.audioContext.createBufferSource(),
+			deckB: this.audioContext.createBufferSource()
+		};
+
 		this.masterGain = this.audioContext.createGain();
 		this.analyser = this.audioContext.createAnalyser();
+
 	}
 
-	loadTrack (files, deckName, callback) {
-		let _this = this;
-		for (let i = 0; i < files.length; i++) {
-			let file = files[i];
-			let reader = new FileReader();
-			reader.readAsArrayBuffer(file);
-			reader.addEventListener('loadend', function(buffer){
-				document.querySelector('#' + deckName).src = null;
-				let audio = document.querySelector('#' + deckName);
-				let objUrl = URL.createObjectURL(file);
-				audio.src = objUrl;
-				let source = _this.audioContext.createMediaElementSource(audio);
-				source.connect(_this.filters[deckName]['hp'].filter);
-				_this.filters[deckName]['hp'].filter.connect(_this.filters[deckName]['bp'].filter);
-				_this.filters[deckName]['bp'].filter.connect(_this.filters[deckName]['lp'].filter);
-				_this.filters[deckName]['lp'].filter.connect(_this.gainNode[deckName]);
-				_this.gainNode[deckName].connect(_this.crossFadeGainNode[deckName]);
-				_this.crossFadeGainNode[deckName].connect(_this.masterGain);
-				_this.masterGain.connect(_this.analyser);
-				_this.analyser.connect(_this.audioContext.destination);
-				callback(file);
-			});
-		}
-	}
 }
 
 export default WebAudio;
