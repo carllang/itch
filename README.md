@@ -9,22 +9,22 @@ https://nodejs.org/en/download/
 
 In your terminal:
 
-clone the repo using git
+clone the itch repo using git
 ```
-git clone git@github.com:carllang/itch.git
+$ git clone git@github.com:carllang/itch.git
 ```
 Change to directory itch
 ```
-cd itch
+$ cd itch
 ```
 install dependencies
 ```
-npm install
+itch>$ npm install
 ```
 
 To run
 ```
-npm start
+itch>$ npm start
 ```
 
 In your browser navigate to localhost:3000
