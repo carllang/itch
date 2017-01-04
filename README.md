@@ -1,12 +1,13 @@
 # itch
 
-Installation instructions
+Installation instructions (Mac or Linux)
 
 install node
 ```
 https://nodejs.org/en/download/
 ```
 
+In your terminal:
 
 clone the repo using git
 ```
@@ -28,4 +29,4 @@ npm start
 
 In your browser navigate to localhost:3000
 
-Supports chrome and firefox latest versions.
+Supports chrome and firefox.
