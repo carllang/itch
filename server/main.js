@@ -38,23 +38,23 @@ if (config.env === 'development') {
   // these files. This middleware doesn't need to be enabled outside
   // of development since this directory will be copied into ~/dist
   // when the application is compiled.
-  app.use(express.static(paths.client('music')))
-
-  //var filepath = path.join(__dirname, 'sound1.wav');
-
-filepath = path.join(__dirname, '../src/music/sound1.wav');
-app.get('/music/sound1.wav', function(req, res){
-    res.set({'Content-Type': 'audio/mpeg'});
-    var readStream = fs.createReadStream(filepath);
-    readStream.pipe(res);
-});
-
-filepath2 = path.join(__dirname, '../src/music/Noisia-mantra.mp3');
-app.get('/music/Noisia-mantra.mp3', function(req, res){
-  res.set({'Content-Type': 'audio/mpeg'});
-  var readStream = fs.createReadStream(filepath2);
-  readStream.pipe(res);
-});
+  //app.use(express.static(paths.client('music')))
+//
+//   //var filepath = path.join(__dirname, 'sound1.wav');
+//
+// filepath = path.join(__dirname, '../src/music/sound1.wav');
+// app.get('/music/sound1.wav', function(req, res){
+//     res.set({'Content-Type': 'audio/mpeg'});
+//     var readStream = fs.createReadStream(filepath);
+//     readStream.pipe(res);
+// });
+//
+// filepath2 = path.join(__dirname, '../src/music/Noisia-mantra.mp3');
+// app.get('/music/Noisia-mantra.mp3', function(req, res){
+//   res.set({'Content-Type': 'audio/mpeg'});
+//   var readStream = fs.createReadStream(filepath2);
+//   readStream.pipe(res);
+// });
 } else {
   debug(
     'Server is being run outside of live development mode, meaning it will ' +
