@@ -24,13 +24,14 @@ class Knob extends React.Component {
 				height={this.props.height}
 				stopper={true}
 				lineCap={'butt'}
-				thickness={0.5}
+				thickness={0.2}
 				displayInput={false}
 				angleArc={270}
 				angleOffset={225}
 				step={0.1}
 				fgColor={'#228DFF'}
 				bgColor={'#404E5C'}
+				inputColor={'#0000ff'}
 				/>
 		);
 	}
