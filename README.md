@@ -1,12 +1,21 @@
 # itch
 
-Installation instructins
+Installation instructions
 
 install node
 ```
 https://nodejs.org/en/download/
 ```
 
+
+clone the repo using git
+```
+git clone git@github.com:carllang/itch.git
+```
+Change to directory itch
+```
+cd itch
+```
 install dependencies
 ```
 npm install
