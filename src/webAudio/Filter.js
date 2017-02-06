@@ -5,7 +5,10 @@ class Filter {
 		this.filter.type = filterType;
 		this.filter.frequency.value = frequency;
 		this.filter.Q.value = q;
-		this.filter.gain.value = gain;
+		if (filterType !== 'bandpass'){
+			this.filter.gain.value = gain;
+		}
+
 		this.filter.deck = deck;
 	}
 

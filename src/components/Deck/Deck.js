@@ -95,6 +95,7 @@ class Deck extends React.Component {
 		  		_this.props.webaudio.audioContext.decodeAudioData( event.target.result, function(buffer) {
 					// if (thisTrack.isPlaying)
 					// 	thisTrack.togglePlayback();
+					_this.props.webaudio.source[_this.props.deckName] = _this.props.webaudio.audioContext.createBufferSource();
 					_this.props.webaudio.source[_this.props.deckName].buffer = buffer;
 					callback(file);
 					//thisTrack.postLoadTasks();
