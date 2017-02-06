@@ -20,14 +20,14 @@ class WebAudio {
 
 		this.filters = {
 			deckA : {
-				hp: new Filter('highpass', 100.0, 0, 0, 'deckA', this.audioContext),
-				bp: new Filter('bandpass', 600.0, 0, 0.5, 'deckA', this.audioContext),
-				lp: new Filter('lowpass', 10000.0, 0, 0, 'deckA', this.audioContext)
+				hp: new Filter('highshelf', 3000, 12, 0, 'deckA', this.audioContext),
+				bp: new Filter('bandpass', 100, 10, 5, 'deckA', this.audioContext),
+				lp: new Filter('lowshelf', 400, 12, 0, 'deckA', this.audioContext)
 			},
 			deckB : {
-				hp: new Filter('highpass', 100.0, 0, 0, 'deckB', this.audioContext),
-				bp: new Filter('bandpass', 600.0, 0, 0.5, 'deckB', this.audioContext),
-				lp: new Filter('lowpass', 10000.0, 0, 0, 'deckB', this.audioContext)
+				hp: new Filter('highshelf', 3000, 12, 0, 'deckB', this.audioContext),
+				bp: new Filter('bandpass', 600, 0, 0.5, 'deckB', this.audioContext),
+				lp: new Filter('lowshelf', 400, 12, 0, 'deckB', this.audioContext)
 			}
 		};
 

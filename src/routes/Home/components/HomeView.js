@@ -20,7 +20,7 @@ export const HomeView = () => (
 				<Deck deckName={decks[0].name} webaudio={webAudio} />
 			</div>
 			<div className="col-md-4">
-				<h1> __i t c h__ </h1>
+				<h1> x__i t c h__x </h1>
 				<Mixer decks={decks} webaudio={webAudio} />
 			</div>
 			<div className="col-md-4">

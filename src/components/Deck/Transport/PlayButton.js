@@ -40,10 +40,10 @@ class PlayButton extends React.Component {
 			return false;
 		}
 
-		sourceNode.connect( this.props.webaudio.filters[this.props.deckName]['hp'].filter );
-		this.props.webaudio.filters[this.props.deckName]['hp'].filter.connect(this.props.webaudio.filters[this.props.deckName]['bp'].filter);
-		this.props.webaudio.filters[this.props.deckName]['bp'].filter.connect(this.props.webaudio.filters[this.props.deckName]['lp'].filter);
-		this.props.webaudio.filters[this.props.deckName]['lp'].filter.connect(this.props.webaudio.gainNode[this.props.deckName]);
+		sourceNode.connect( this.props.webaudio.filters[this.props.deckName]['lp'].filter );
+		this.props.webaudio.filters[this.props.deckName]['lp'].filter.connect(this.props.webaudio.filters[this.props.deckName]['bp'].filter);
+		this.props.webaudio.filters[this.props.deckName]['bp'].filter.connect(this.props.webaudio.filters[this.props.deckName]['hp'].filter);
+		this.props.webaudio.filters[this.props.deckName]['hp'].filter.connect(this.props.webaudio.gainNode[this.props.deckName]);
 		this.props.webaudio.gainNode[this.props.deckName].connect(this.props.webaudio.crossFadeGainNode[this.props.deckName]);
 		this.props.webaudio.crossFadeGainNode[this.props.deckName].connect(this.props.webaudio.masterGain);
 		//this.props.webaudio.masterGain.connect(this.props.webaudio.analyser);

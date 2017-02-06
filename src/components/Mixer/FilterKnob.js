@@ -5,13 +5,17 @@ class Knob extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {value: 5};
+		this.state = {value: 10000};
 	}
 
 	handleChange = (newValue) => {
 		this.setState({value: newValue});
-		this.props.webaudio.filters[this.props.deck][this.props.filter].filter.frequency.value = newValue;
+		this.props.webaudio.filters[this.props.deck][this.props.filter].filter[this.props.filterProperty].value = newValue;
 	};
+
+	componentDidMount() {
+		this.setState({value: 10000});
+	}
 
 	render() {
 		return (
@@ -24,14 +28,15 @@ class Knob extends React.Component {
 				height={this.props.height}
 				stopper={true}
 				lineCap={'butt'}
-				thickness={0.2}
-				displayInput={false}
+				thickness={0.5}
+				displayInput={true}
 				angleArc={270}
 				angleOffset={225}
-				step={0.1}
+				step={10}
 				fgColor={'#228DFF'}
-				bgColor={'#404E5C'}
-				inputColor={'#0000ff'}
+				bgColor={'#000000'}
+				inputColor={'#ffffff'}
+				cursor={20}
 				/>
 		);
 	}
