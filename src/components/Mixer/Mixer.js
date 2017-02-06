@@ -3,6 +3,8 @@ import VolumeControl from './VolumeControl';
 import CrossFader from './CrossFader';
 import './Mixer.scss';
 import FilterKnob from './FilterKnob';
+import VUmeter from '../Visualizer';
+
 
 
 class Mixer extends React.Component {
@@ -16,27 +18,27 @@ class Mixer extends React.Component {
 			<div>
 				<div className="row">
 					<div className="col-md-6 mixer-knobs-contr">
-						<FilterKnob min={0} max={20000} width={50} height={50} filter={'hp'} deck={this.props.decks[0].name} webaudio={this.props.webaudio} />
-						<FilterKnob min={0} max={20000} width={50} height={50} filter={'bp'} deck={this.props.decks[0].name} webaudio={this.props.webaudio} />
-						<FilterKnob min={0} max={20000} width={50} height={50} filter={'lp'} deck={this.props.decks[0].name} webaudio={this.props.webaudio} />
+						<FilterKnob min={-25} max={25} width={50} height={50} filter={'hp'} filterProperty={'gain'} deck={'deckA'} webaudio={this.props.webaudio} />
+						<FilterKnob min={500} max={5000} width={50} height={50} filter={'bp'} filterProperty={'frequency'} deck={'deckA'} webaudio={this.props.webaudio} />
+						<FilterKnob min={-25} max={25} width={50} height={50} filter={'lp'} filterProperty={'gain'} deck={'deckA'} webaudio={this.props.webaudio} />
 					</div>
 					<div className="col-md-6 mixer-knobs-contr">
-						<FilterKnob min={0} max={20000} width={50} height={50} filter={'hp'}  deck={this.props.decks[1].name} webaudio={this.props.webaudio} />
-						<FilterKnob min={0} max={20000} width={50} height={50} filter={'bp'}  deck={this.props.decks[1].name} webaudio={this.props.webaudio} />
-						<FilterKnob min={0} max={20000} width={50} height={50} filter={'lp'}  deck={this.props.decks[1].name} webaudio={this.props.webaudio} />
+						<FilterKnob min={-25} max={25} width={50} height={50} filter={'hp'} filterProperty={'gain'} deck={'deckB'} webaudio={this.props.webaudio} />
+						<FilterKnob min={0} max={20000} width={50} height={50} filter={'bp'} filterProperty={'frequency'} deck={'deckB'} webaudio={this.props.webaudio} />
+						<FilterKnob min={-25} max={25} width={50} height={50} filter={'lp'} filterProperty={'gain'} deck={'deckB'} webaudio={this.props.webaudio} />
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-md-6">
-						<VolumeControl deck={this.props.decks[0].name} webaudio={this.props.webaudio}/>
+						<VolumeControl deck="deckA" webaudio={this.props.webaudio}/>
 					</div>
 					<div className="col-md-6">
-						<VolumeControl deck={this.props.decks[1].name} webaudio={this.props.webaudio}/>
+						<VolumeControl deck="deckB" webaudio={this.props.webaudio}/>
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-md-12">
-						&nbsp;
+						<VUmeter webaudio={this.props.webaudio} deck="deckA"/>
 					</div>
 				</div>
 				<div className="row">
