@@ -25,14 +25,22 @@ class UVmeter extends React.Component{
 			this.c = _this.refs.uvmeter;
 			this.ctx = this.c.getContext("2d");
 			// clear the current state
-			this.ctx.clearRect(0, 0, 60, 400);
+			this.ctx.clearRect(0, 0, 12, 200);
 
+			var grd = this.ctx.createLinearGradient(0,100,12,200);
+
+
+
+			grd.addColorStop(0, 'red');
+			grd.addColorStop(0.25 , 'yellow');
+			grd.addColorStop(0.75, 'green');
+			grd.addColorStop(1, '#228DFF');
 			// set the fill style
-			//this.ctx.fillStyle=gradient;
-			this.ctx.fillStyle = '#ffffff';
+			this.ctx.fillStyle=grd;
+			//this.ctx.fillStyle = '#ffffff';
 			// create the meters
-			this.ctx.fillRect(0,400-average,25,400);
-			this.ctx.fillRect(30,400-average2,25,400);
+			this.ctx.fillRect(0,200-average,5,200);
+			this.ctx.fillRect(7,200-average2,5,200);
 			this.ctx.fill();
 
 		}
@@ -66,7 +74,7 @@ class UVmeter extends React.Component{
 			<div>
 				<h4>UV Meter</h4>
 				<div>
-					<canvas ref="uvmeter" width="200px" height="400px"></canvas>
+					<canvas ref="uvmeter" width="200px" height="200px"></canvas>
 				</div>
 			</div>
 		);

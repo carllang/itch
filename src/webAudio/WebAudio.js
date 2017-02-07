@@ -20,14 +20,15 @@ class WebAudio {
 
 		this.filters = {
 			deckA : {
-				hp: new Filter('highshelf', 3000, 12, 0, 'deckA', this.audioContext),
-				bp: new Filter('bandpass', 100, 10, 5, 'deckA', this.audioContext),
-				lp: new Filter('lowshelf', 400, 12, 0, 'deckA', this.audioContext)
+				//TODO figure out best filters and frequency and Q values...for now it sounds okish...
+				hp: new Filter('highshelf', 6000, 0, 0, 'deckA', this.audioContext),
+				bp: new Filter('peaking', 1200, 0, 0.1, 'deckA', this.audioContext),
+				lp: new Filter('lowshelf', 400, 0, 0, 'deckA', this.audioContext)
 			},
 			deckB : {
-				hp: new Filter('highshelf', 3000, 12, 0, 'deckB', this.audioContext),
-				bp: new Filter('bandpass', 600, 0, 0.5, 'deckB', this.audioContext),
-				lp: new Filter('lowshelf', 400, 12, 0, 'deckB', this.audioContext)
+				hp: new Filter('highshelf', 6000, 0, 0, 'deckB', this.audioContext),
+				bp: new Filter('peaking', 1200, 0, 0.1, 'deckB', this.audioContext),
+				lp: new Filter('lowshelf', 400, 0, 0, 'deckB', this.audioContext)
 			}
 		};
 

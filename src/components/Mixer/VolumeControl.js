@@ -6,7 +6,7 @@ class VolumeControl extends React.Component {
 	constructor (props) {
 		super(props);
 		this.changeVolume = this.changeVolume.bind(this);
-		this.state = {volumeUnit: 0};
+		this.state = {volumeUnit: 0.5};
 		this.props.webaudio.gainNode[this.props.deck].gain.value = this.state.volumeUnit;
 	}
 

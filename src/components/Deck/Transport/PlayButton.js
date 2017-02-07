@@ -56,6 +56,10 @@ class PlayButton extends React.Component {
 		this.props.webaudio.analyser.connect(this.props.webaudio.javascriptNode);
 		this.props.webaudio.javascriptNode.connect(this.props.webaudio.audioContext.destination);
 
+
+
+
+
 		this.props.webaudio.masterGain.connect(this.props.webaudio.audioContext.destination);
 
 
