@@ -39,18 +39,38 @@ class WebAudio {
 
 		this.masterGain = this.audioContext.createGain();
 
-		this.javascriptNode = this.audioContext.createScriptProcessor(2048, 1, 1);
+		this.javascriptNode = {
+			deckA: this.audioContext.createScriptProcessor(2048, 1, 1),
+			deckB: this.audioContext.createScriptProcessor(2048, 1, 1)
+		}
 
-		this.analyser = this.audioContext.createAnalyser();
-		this.analyser.smoothingTimeConstant = 0.0;
-		this.analyser.fftSize = 1024;
+		// left channel ?
+		this.analyser = {
+			deckA: this.audioContext.createAnalyser(),
+			deckB: this.audioContext.createAnalyser()
+		}
 
-		this.analyser2 = this.audioContext.createAnalyser();
-		this.analyser2.smoothingTimeConstant = 0.0;
-		this.analyser2.fftSize = 1024;
+		this.analyser.deckA.smoothingTimeConstant = 0.0;
+		this.analyser.deckA.fftSize = 1024;
+		this.analyser.deckB.smoothingTimeConstant = 0.0;
+		this.analyser.deckB.fftSize = 1024;
 
+		// right channel ?
+		this.analyser2 = {
+			deckA: this.audioContext.createAnalyser(),
+			deckB: this.audioContext.createAnalyser()
+		}
 
-		this.splitter = this.audioContext.createChannelSplitter();
+		this.analyser2.deckA.smoothingTimeConstant = 0.0;
+		this.analyser2.deckA.fftSize = 1024;
+		this.analyser2.deckB.smoothingTimeConstant = 0.0;
+		this.analyser2.deckB.fftSize = 1024;
+
+		this.splitter = {
+			deckA: this.audioContext.createChannelSplitter(),
+			deckB: this.audioContext.createChannelSplitter()
+		};
+
 
 	}
 

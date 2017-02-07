@@ -45,24 +45,19 @@ class PlayButton extends React.Component {
 		this.props.webaudio.filters[this.props.deckName]['bp'].filter.connect(this.props.webaudio.filters[this.props.deckName]['hp'].filter);
 		this.props.webaudio.filters[this.props.deckName]['hp'].filter.connect(this.props.webaudio.gainNode[this.props.deckName]);
 		this.props.webaudio.gainNode[this.props.deckName].connect(this.props.webaudio.crossFadeGainNode[this.props.deckName]);
+
 		this.props.webaudio.crossFadeGainNode[this.props.deckName].connect(this.props.webaudio.masterGain);
 		//this.props.webaudio.masterGain.connect(this.props.webaudio.analyser);
 
 		// connect the source to the analyser and the splitter
 		// So basically source can connect to analyser and can be seperate chain for visualiser to output
-		this.props.webaudio.masterGain.connect(this.props.webaudio.splitter);
-		this.props.webaudio.splitter.connect(this.props.webaudio.analyser,0,0);
-        this.props.webaudio.splitter.connect(this.props.webaudio.analyser2,1,0);
-		this.props.webaudio.analyser.connect(this.props.webaudio.javascriptNode);
-		this.props.webaudio.javascriptNode.connect(this.props.webaudio.audioContext.destination);
-
-
-
-
+		this.props.webaudio.crossFadeGainNode[this.props.deckName].connect(this.props.webaudio.splitter[this.props.deckName]);
+		this.props.webaudio.splitter[this.props.deckName].connect(this.props.webaudio.analyser[this.props.deckName],0,0);
+        this.props.webaudio.splitter[this.props.deckName].connect(this.props.webaudio.analyser2[this.props.deckName],1,0);
+		this.props.webaudio.analyser[this.props.deckName].connect(this.props.webaudio.javascriptNode[this.props.deckName]);
+		this.props.webaudio.javascriptNode[this.props.deckName].connect(this.props.webaudio.audioContext.destination);
 
 		this.props.webaudio.masterGain.connect(this.props.webaudio.audioContext.destination);
-
-
 
 		this.props.deck.sourceNode = sourceNode;
 		this.props.deck.currentPlaybackRate = 1.0;

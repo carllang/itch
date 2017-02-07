@@ -10,37 +10,37 @@ class UVmeter extends React.Component{
 	drawUVmeter () {
 
 		let _this = this;
-		this.props.webaudio.javascriptNode.onaudioprocess = function() {
+		_this.props.webaudio.javascriptNode[_this.props.deck].onaudioprocess = function() {
 
 			// get the average for the first channel
-			var array =  new Uint8Array(_this.props.webaudio.analyser.frequencyBinCount);
-			_this.props.webaudio.analyser.getByteFrequencyData(array);
+			var array =  new Uint8Array(_this.props.webaudio.analyser[_this.props.deck].frequencyBinCount);
+			_this.props.webaudio.analyser[_this.props.deck].getByteFrequencyData(array);
 			var average = _this.getAverageVolume(array);
 
 			// get the average for the second channel
-			var array2 =  new Uint8Array(_this.props.webaudio.analyser2.frequencyBinCount);
-			_this.props.webaudio.analyser2.getByteFrequencyData(array2);
+			var array2 =  new Uint8Array(_this.props.webaudio.analyser2[_this.props.deck].frequencyBinCount);
+			_this.props.webaudio.analyser2[_this.props.deck].getByteFrequencyData(array2);
 			var average2 = _this.getAverageVolume(array2);
 
 			this.c = _this.refs.uvmeter;
 			this.ctx = this.c.getContext("2d");
 			// clear the current state
-			this.ctx.clearRect(0, 0, 12, 200);
+			this.ctx.clearRect(0, 0, 12, 150);
 
-			var grd = this.ctx.createLinearGradient(0,100,12,200);
-
-
-
+			// VU gradient
+			var grd = this.ctx.createLinearGradient(0,100,12,150);
 			grd.addColorStop(0, 'red');
-			grd.addColorStop(0.25 , 'yellow');
-			grd.addColorStop(0.75, 'green');
+			grd.addColorStop(0.10 , 'yellow');
+			grd.addColorStop(0.5, 'green');
+			grd.addColorStop(0.6, '#228DFF');
 			grd.addColorStop(1, '#228DFF');
+
 			// set the fill style
 			this.ctx.fillStyle=grd;
 			//this.ctx.fillStyle = '#ffffff';
 			// create the meters
-			this.ctx.fillRect(0,200-average,5,200);
-			this.ctx.fillRect(7,200-average2,5,200);
+			this.ctx.fillRect(0,150-average,5,150);
+			this.ctx.fillRect(7,150-average2,5,150);
 			this.ctx.fill();
 
 		}
@@ -72,9 +72,8 @@ class UVmeter extends React.Component{
 	render () {
 		return (
 			<div>
-				<h4>UV Meter</h4>
 				<div>
-					<canvas ref="uvmeter" width="200px" height="200px"></canvas>
+					<canvas ref="uvmeter" width="20px" height="150px"></canvas>
 				</div>
 			</div>
 		);
