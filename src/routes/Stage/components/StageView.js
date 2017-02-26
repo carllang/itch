@@ -1,5 +1,5 @@
 import React from 'react'
-import './HomeView.scss'
+import './StageView.scss'
 import Deck from '../../../components/Deck'
 import Mixer from '../../../components/Mixer';
 import WebAudio from '../../../webAudio';
@@ -13,7 +13,7 @@ const decks = [{
 				}];
 
 
-export const HomeView = () => (
+export const StageView = () => (
 	<div className="container-fluid">
 		<div className="row">
 			<div className="col-md-4">
@@ -31,4 +31,4 @@ export const HomeView = () => (
 	</div>
 )
 
-export default HomeView
+export default StageView

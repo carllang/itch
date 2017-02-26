@@ -127,7 +127,6 @@ class Deck extends React.Component {
 		return (
 			<div className="droppable">
 				<h4>{this.state.trackName}</h4>
-				<audio ref="htmlaudio" id={this.props.deckName}></audio>
 				<canvas ref="canvas" id={this.props.deckName} className="Deck" width="300px" height="238px"></canvas>
 				<Transport {...this.props} deck={this.deck}/>
 			</div>
