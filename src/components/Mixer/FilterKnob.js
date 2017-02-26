@@ -5,7 +5,7 @@ class Knob extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {value: 10000};
+		this.state = {value: this.props.default};
 	}
 
 	handleChange = (newValue) => {
@@ -14,7 +14,7 @@ class Knob extends React.Component {
 	};
 
 	componentDidMount() {
-		this.setState({value: 10000});
+		this.setState({value: this.props.default});
 	}
 
 	render() {
@@ -32,7 +32,7 @@ class Knob extends React.Component {
 				displayInput={true}
 				angleArc={270}
 				angleOffset={225}
-				step={10}
+				step={1}
 				fgColor={'#228DFF'}
 				bgColor={'#000000'}
 				inputColor={'#ffffff'}
