@@ -71,6 +71,28 @@ class WebAudio {
 			deckB: this.audioContext.createChannelSplitter()
 		};
 
+		this.trackProperties = {
+			deckA: {
+				currentPlaybackRate: 1.0,
+				stopTime: 0,
+				lastTimeStamp: 0,
+				restartTime: 0,
+				offset: 0,
+				lastPBR: 1.0,
+				lastBufferTime: 0.0
+			},
+			deckB: {
+				currentPlaybackRate: 1.0,
+				stopTime: 0,
+				lastTimeStamp: 0,
+				restartTime: 0,
+				offset: 0,
+				lastPBR: 1.0,
+				lastBufferTime: 0.0
+			}
+		}
+
+
 
 	}
 

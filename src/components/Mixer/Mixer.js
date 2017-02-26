@@ -6,7 +6,7 @@ import FilterKnob from './FilterKnob';
 import VUmeter from '../Visualizer';
 
 
-
+//TODO refactor to stateless functional component.
 class Mixer extends React.Component {
 
 	constructor (props){
