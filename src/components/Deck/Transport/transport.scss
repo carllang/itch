@@ -10,8 +10,8 @@ button{
 	}
 
 	.active{
-		color: #228DFF;
-		text-shadow: 0px 0px 20px #228DFF, 0px 0px 20px #228DFF;
+		color: $theme-hilight-colour;
+		text-shadow: 0px 0px 20px $theme-hilight-colour, 0px 0px 20px $theme-hilight-colour;
 	}
 	&:focus{
 		outline: 0;

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactKnob from 'react-canvas-knob';
 
+
 class Knob extends React.Component {
 
 	constructor(props) {
@@ -33,7 +34,7 @@ class Knob extends React.Component {
 				angleArc={270}
 				angleOffset={225}
 				step={1}
-				fgColor={'#228DFF'}
+				fgColor={this.props.color}
 				bgColor={'#000000'}
 				inputColor={'#ffffff'}
 				cursor={20}
