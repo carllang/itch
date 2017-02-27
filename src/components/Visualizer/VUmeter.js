@@ -31,9 +31,9 @@ class UVmeter extends React.Component{
 			var grd = this.ctx.createLinearGradient(0,100,12,150);
 			grd.addColorStop(0, 'red');
 			grd.addColorStop(0.10 , 'yellow');
-			grd.addColorStop(0.5, 'green');
-			grd.addColorStop(0.6, '#228DFF');
-			grd.addColorStop(1, '#228DFF');
+			grd.addColorStop(1, 'green');
+			// grd.addColorStop(0.6, _this.props.color);
+			// grd.addColorStop(1, _this.props.color);
 
 			// set the fill style
 			this.ctx.fillStyle=grd;
@@ -78,8 +78,6 @@ class UVmeter extends React.Component{
 			</div>
 		);
 	}
-
-
 }
 
 
