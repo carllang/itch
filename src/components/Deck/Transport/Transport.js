@@ -1,7 +1,10 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import PlayButton from './PlayButton';
 import StopButton from './StopButton';
 import './transport.scss';
+import { playChange } from '../../../actions/actionCreators';
 
 class Transport extends React.Component {
 
@@ -15,6 +18,7 @@ class Transport extends React.Component {
 	}
 
 	togglePlaybackSpinUpDown () {
+		this.props.dispatch(playChange(this.state.isPlaying));
 		let audioCtx = this.props.webaudio.audioContext;
 		let webAudio = this.props.webaudio;
 		let now = this.props.webaudio.audioContext.currentTime;
@@ -91,4 +95,8 @@ class Transport extends React.Component {
 	}
 }
 
-export default Transport;
+const mapStateToProps = function (state) {
+  return {state};
+}
+
+export default connect(mapStateToProps)(Transport);

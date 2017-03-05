@@ -1,6 +1,9 @@
 import React from 'react';
 import Transport from './Transport';
 import './Deck.scss';
+import {connect} from 'react-redux';
+import {loadTrackDispatch}  from '../../actions/actionCreators';
+
 
 class Deck extends React.Component {
 
@@ -12,13 +15,12 @@ class Deck extends React.Component {
 			deckName: this.props.deckName
 		};
 
-		this.deck = {
-			gain: 1.0,
-			currentPlaybackRate: 1.0,
-			lastBufferTime: 0.0,
-			isPlaying: false,
-			stopTime: 0.0
-		};
+		// this.deck = {
+		// 	gain: 1.0,
+		// 	currentPlaybackRate: 1.0,
+		// 	lastBufferTime: 0.0,
+		// 	stopTime: 0.0
+		// };
 
 		this.handleDrop = this.handleDrop.bind(this);
 		this.handleDragOver = this.handleDragOver.bind(this);
@@ -68,8 +70,15 @@ class Deck extends React.Component {
 
 		this.loadTrack(files, this.props.deckName, function(result) {
 			if (result){
+
+				let loader = {
+							deckName: _this.props.deckName,
+							trackName: result.name
+						};
+
+				_this.props.dispatch(loadTrackDispatch(loader));
 				_this.setState({
-					trackName: result.name + ' ' + (result.size/1000000).toFixed(2) + 'mb'
+					trackName: result.name
 				});
 			}else{
 				_this.setState({
@@ -121,13 +130,14 @@ class Deck extends React.Component {
 
 	componentDidUpdate () {
 		this.drawDisk();
+		console.log('loadtrack ', this.props.state.decks[this.props.deckName].loadTrack);
 	}
 
 	render () {
 		return (
 			<div className="droppable">
 				<h4>{this.state.trackName}</h4>
-				<canvas ref="canvas" id={this.props.deckName} className="Deck" width="300px" height="238px"></canvas>
+				<canvas ref="canvas" id={this.props.deckName} className={(this.props.state.decks[this.props.deckName].loadTrack)? 'Deck animateDeck':'Deck'} width="300px" height="238px"></canvas>
 				<Transport {...this.props} deck={this.deck}/>
 			</div>
 		);
@@ -139,4 +149,10 @@ Deck.propTypes = {
     deckName: React.PropTypes.string.isRequired
 };
 
-export default Deck;
+const mapStateToProps = function (state) {
+  return {
+	  state: state
+  };
+}
+
+export default connect(mapStateToProps)(Deck);

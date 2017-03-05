@@ -86,6 +86,7 @@ body {
 	width: 300;
 	height: 238;
 	background-color: #222222;
+
 }
 
 *,
@@ -106,5 +107,36 @@ h1{
 h1{
 	margin-top: 5px;
 	color: $theme-hilight-colour;
-	text-shadow: 0px 0px 1px $theme-hilight-colour, 0px 0px 0px $theme-hilight-colour;
+	/*animation: colourChange 1s infinite;*/
 }
+
+@keyframes colourChange
+{
+	0% {
+		color:$theme-hilight-colour-start;
+	}
+
+	50% {
+		color:$theme-hilight-colour-end;
+	}
+
+}
+
+
+   /*@-webkit-keyframes bg-color {
+  0% { background-color: #e74c3c; }
+  20% { background-color: #f1c40f; }
+  40% { background-color: #1abc9c; }
+  60% { background-color: #3498db; }
+  80% { background-color: #9b59b6; }
+  100% { background-color: #e74c3c; }
+}
+
+@keyframes bg-color {
+  0% { background-color: #e74c3c; }
+  20% { background-color: #f1c40f; }
+  40% { background-color: #1abc9c; }
+  60% { background-color: #3498db; }
+  80% { background-color: #9b59b6; }
+  100% { background-color: #e74c3c; }
+}*/

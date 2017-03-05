@@ -3,6 +3,9 @@ import thunk from 'redux-thunk'
 import { browserHistory } from 'react-router'
 import makeRootReducer from './reducers'
 import { updateLocation } from './location'
+import createLogger from 'redux-logger'
+
+const logger = createLogger();
 
 export default (initialState = {}) => {
   // ======================================================
@@ -28,7 +31,7 @@ export default (initialState = {}) => {
     makeRootReducer(),
     initialState,
     compose(
-      applyMiddleware(...middleware),
+      applyMiddleware(...middleware, logger),
       ...enhancers
     )
   )

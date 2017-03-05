@@ -2,6 +2,25 @@
 
 
 .Deck{
-	box-shadow: 0px 0px 10px $theme-hilight-colour, 0px 0px 10px $theme-hilight-colour;
+	box-shadow: 0px 0px 10px $theme-hilight-colour-start, 0px 0px 10px $theme-hilight-colour-start;
 	background: #161414;
+}
+
+.animateDeck {
+	animation: colourChangeDeck 2s ease;
+}
+
+
+@keyframes colourChangeDeck
+{
+	0% {
+		//box-shadow-color:$theme-hilight-colour-start;
+		box-shadow: 0px 0px 5px $theme-hilight-colour-start, 0px 0px 5px $theme-hilight-colour-start;
+	}
+
+	50% {
+		//box-shadow-color:$theme-hilight-colour-end;
+		box-shadow: 0px 0px 25px $theme-hilight-colour-start, 0px 0px 25px $theme-hilight-colour-start;
+	}
+
 }
