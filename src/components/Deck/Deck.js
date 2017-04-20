@@ -130,7 +130,6 @@ class Deck extends React.Component {
 
 	componentDidUpdate () {
 		this.drawDisk();
-		console.log('loadtrack ', this.props.state.decks[this.props.deckName].loadTrack);
 	}
 
 	render () {
