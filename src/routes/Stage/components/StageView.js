@@ -20,7 +20,7 @@ export const StageView = () => (
 				<Deck deckName={decks[0].name} webaudio={webAudio} />
 			</div>
 			<div className="col-md-4">
-				<h1> x__i t c h__x </h1>
+				<h1> i t c h </h1>
 				<Mixer decks={decks} webaudio={webAudio} />
 			</div>
 			<div className="col-md-4">
