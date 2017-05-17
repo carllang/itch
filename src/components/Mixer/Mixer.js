@@ -1,15 +1,16 @@
 import React from 'react';
 import VolumeControl from './VolumeControl';
 import CrossFader from './CrossFader';
-import {themeHilightColour} from './Mixer.scss';
+import { themeHilightColour } from './Mixer.scss';
 import FilterKnob from './FilterKnob';
-import VUmeter from '../Visualizer';
+import { VUmeter } from '../Visualizer';
 
 
 class Mixer extends React.Component {
 
 	constructor (props){
 		super(props);
+		
 		this.crossFade = this.crossFade.bind(this);
 		this.state = {gainB: 0.5};
 		this.props.webaudio.crossFadeGainNode['deckA'].gain.value = this.state.gainB;
