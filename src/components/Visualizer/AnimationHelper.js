@@ -2,10 +2,10 @@
 
 
     class AnimationHelper {
-        
+
         constructor () {
 
-           
+
         }
 
         updateTime ( now ) {
@@ -13,7 +13,7 @@
             this.lastBufferTime += (now-this.lastTimeStamp) * this.lastPBR;
             this.lastTimeStamp = now;
         }
-        
+
         updatePlatter ( drawOnScreen, webAudio, disckCanvas ) {
             var now = webAudio.audioCtx.currentTime;
             var bufferTime;
@@ -51,12 +51,12 @@
                 var radians = ((bufferTime * REVPERSEC) % 1) * 2 * Math.PI;
                 var context = disckCanvas;
 
-                context.clearRect(-150,-150,300,300);  // TODO: shouldn't hardcode
+                context.clearRect(-150,-150,300,300);
 
-                context.rotate( radians );
-                context.fillStyle = "white";
-                context.fillText("itchy and scratchy",-61,8);
-                context.rotate( -radians );
+                // context.rotate( radians );
+                // context.fillStyle = "white";
+                // context.fillText("itchy and scratchy",-61,8);
+                // context.rotate( -radians );
 
                 // if (this.buffer) {
                 //     Now draw the position in the buffer
@@ -108,7 +108,7 @@
 
             return keepAnimating;	// "keep animating" - may need to check if !isplaying
         }
-    } 
+    }
 
 
 //exports default AnimationHelper;

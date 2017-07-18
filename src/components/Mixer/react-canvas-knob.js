@@ -89,7 +89,6 @@ var Knob = function (_React$Component) {
     };
 
     _this.handleMouseUp = function (e) {
-      //console.log(_this.props);
       //_this.props.onChangeEnd(_this.eventToValue(e));
       document.removeEventListener('mousemove', _this.handleMouseMove);
       document.removeEventListener('mouseup', _this.handleMouseUp);
