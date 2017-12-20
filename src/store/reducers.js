@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux'
 import locationReducer from './location'
+import decksReducer from './decksReducer'
+
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     location: locationReducer,
+	decks: decksReducer,
     ...asyncReducers
   })
 }

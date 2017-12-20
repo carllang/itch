@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactKnob from 'react-canvas-knob';
+import ReactKnob from './react-canvas-knob';
 
 
 class Knob extends React.Component {

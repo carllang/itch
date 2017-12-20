@@ -111,46 +111,48 @@
  - Extended quality reward 'funnel'
 
 */
-BeatDetektor = function(bpm_minimum, bpm_maximum, alt_config)
-{
-	if (typeof(bpm_minimum)=='undefined') bpm_minimum = 85.0;
-	if (typeof(bpm_maximum)=='undefined') bpm_maximum = 169.0;
 
-	this.config = (typeof(alt_config)!='undefined')?alt_config:BeatDetektor.config;
+class BeatDetektor {
+	constructor(bpm_minimum, bpm_maximum, alt_config) {
+		if (typeof(bpm_minimum)=='undefined') bpm_minimum = 85.0;
+		if (typeof(bpm_maximum)=='undefined') bpm_maximum = 169.0;
 
-	this.BPM_MIN = bpm_minimum;
-	this.BPM_MAX = bpm_maximum;
+		this.config = (typeof(alt_config)!='undefined')?alt_config:BeatDetektor.config;
 
-	this.beat_counter = 0;
-	this.half_counter = 0;
-	this.quarter_counter = 0;
+		this.BPM_MIN = bpm_minimum;
+		this.BPM_MAX = bpm_maximum;
 
-	// current average (this sample) for range n
-	this.a_freq_range = new Array(this.config.BD_DETECTION_RANGES);
-	// moving average of frequency range n
-	this.ma_freq_range = new Array(this.config.BD_DETECTION_RANGES);
-	// moving average of moving average of frequency range n
-	this.maa_freq_range = new Array(this.config.BD_DETECTION_RANGES);
-	// timestamp of last detection for frequecy range n
-	this.last_detection = new Array(this.config.BD_DETECTION_RANGES);
+		this.beat_counter = 0;
+		this.half_counter = 0;
+		this.quarter_counter = 0;
 
-	// moving average of gap lengths
-	this.ma_bpm_range = new Array(this.config.BD_DETECTION_RANGES);
-	// moving average of moving average of gap lengths
-	this.maa_bpm_range = new Array(this.config.BD_DETECTION_RANGES);
+		// current average (this sample) for range n
+		this.a_freq_range = new Array(this.config.BD_DETECTION_RANGES);
+		// moving average of frequency range n
+		this.ma_freq_range = new Array(this.config.BD_DETECTION_RANGES);
+		// moving average of moving average of frequency range n
+		this.maa_freq_range = new Array(this.config.BD_DETECTION_RANGES);
+		// timestamp of last detection for frequecy range n
+		this.last_detection = new Array(this.config.BD_DETECTION_RANGES);
 
-	// range n quality attribute, good match  = quality+, bad match  = quality-, min  = 0
-	this.detection_quality = new Array(this.config.BD_DETECTION_RANGES);
+		// moving average of gap lengths
+		this.ma_bpm_range = new Array(this.config.BD_DETECTION_RANGES);
+		// moving average of moving average of gap lengths
+		this.maa_bpm_range = new Array(this.config.BD_DETECTION_RANGES);
 
-	// current trigger state for range n
-	this.detection = new Array(this.config.BD_DETECTION_RANGES);
+		// range n quality attribute, good match  = quality+, bad match  = quality-, min  = 0
+		this.detection_quality = new Array(this.config.BD_DETECTION_RANGES);
 
-	this.reset();
+		// current trigger state for range n
+		this.detection = new Array(this.config.BD_DETECTION_RANGES);
 
-	if (typeof(console)!='undefined')
-	{
-		console.log("BeatDetektor("+this.BPM_MIN+","+this.BPM_MAX+") created.")
+		this.reset();
+
+
+			console.log("BeatDetektor("+this.BPM_MIN+","+this.BPM_MAX+") created.")
+
 	}
+
 }
 
 BeatDetektor.prototype.reset = function()
@@ -164,7 +166,7 @@ BeatDetektor.prototype.reset = function()
 		this.maa_freq_range[i] = 0.0;
 		this.last_detection[i] = 0.0;
 
-		this.ma_bpm_range[i] =
+		this.ma_bpm_range[i] = 0.0;
 		this.maa_bpm_range[i] = 60.0/this.BPM_MIN + ((60.0/this.BPM_MAX-60.0/this.BPM_MIN) * (i/this.config.BD_DETECTION_RANGES));
 
 		this.detection_quality[i] = 0.0;
@@ -227,6 +229,7 @@ BeatDetektor.config = BeatDetektor.config_default;
 
 BeatDetektor.prototype.process = function(timer_seconds, fft_data)
 {
+	console.log('length', fft_data.length)
 	if (!this.last_timer) { this.last_timer = timer_seconds; return; }	// ignore 0 start time
 	if (this.last_timer > timer_seconds) { this.reset(); return; }
 
@@ -660,3 +663,5 @@ BeatDetektor.modules.vis.VU.prototype.getLevel = function(x)
 {
 	return this.vu_levels[x];
 }
+
+export default BeatDetektor

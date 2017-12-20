@@ -1,3 +1,3 @@
-import Deck from './Deck.js';
+import Deck from './Deck.js'
 
-export default Deck;
+export default Deck

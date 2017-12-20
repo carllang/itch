@@ -1,15 +1,19 @@
-import React, { Component, PropTypes } from 'react'
-import { browserHistory, Router } from 'react-router'
+import React, { Component } from 'react'
+import { Router } from 'react-router'
 import { Provider } from 'react-redux'
+import { PropTypes } from 'prop-types'
+import createBrowserHistory from 'history/lib/createBrowserHistory'
+
+const history = createBrowserHistory()
 
 class AppContainer extends Component {
-  static propTypes = {
-    routes : PropTypes.object.isRequired,
-    store  : PropTypes.object.isRequired
-  }
+    static propTypes = {
+      routes : PropTypes.object.isRequired,
+      store  : PropTypes.object.isRequired
+    }
 
   shouldComponentUpdate () {
-    return false
+      return false
   }
 
   componentDidMount () {
@@ -29,7 +33,7 @@ class AppContainer extends Component {
     return (
       <Provider store={store}>
         <div style={{ height: '100%' }}>
-          <Router history={browserHistory} children={routes} />
+          <Router history={history} children={routes} />
         </div>
       </Provider>
     )

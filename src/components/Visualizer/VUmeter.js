@@ -1,13 +1,13 @@
 import React from 'react';
 
 
-class UVmeter extends React.Component{
+class VUmeter extends React.Component{
 
 	constructor (props) {
 		super(props);
 	}
 
-	drawUVmeter () {
+	drawVUmeter () {
 
 		let _this = this;
 		_this.props.webaudio.javascriptNode[_this.props.deck].onaudioprocess = function() {
@@ -62,11 +62,11 @@ class UVmeter extends React.Component{
 	}
 
 	componentDidUpdate () {
-		this.drawUVmeter();
+		this.drawVUmeter();
 	}
 
 	componentDidMount () {
-		this.drawUVmeter();
+		this.drawVUmeter();
 	}
 
 	render () {
@@ -81,4 +81,4 @@ class UVmeter extends React.Component{
 }
 
 
-export default UVmeter;
+export default VUmeter;
