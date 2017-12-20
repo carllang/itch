@@ -7,24 +7,9 @@ import createBrowserHistory from 'history/lib/createBrowserHistory'
 const history = createBrowserHistory()
 
 class AppContainer extends Component {
-    static propTypes = {
-      routes : PropTypes.object.isRequired,
-      store  : PropTypes.object.isRequired
-    }
-
-  shouldComponentUpdate () {
-      return false
-  }
-
-  componentDidMount () {
-	//   function preventDefaultExcept(predicates) {
-	//   return function (e) {
-	//     var passEvery = predicates.every(function (predicate) { return predicate(e); })
-	//     if (!passEvery) {
-	//       e.preventDefault();
-	//     }
-	//   };
-	// }
+  static propTypes = {
+    routes : PropTypes.object.isRequired,
+    store  : PropTypes.object.isRequired
   }
 
   render () {
