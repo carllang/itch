@@ -1,9 +1,9 @@
-import React from 'react';
+import React from 'react'
 
 class GainControl extends React.Component {
-	constructor (props) {
-		super(props);
-	}
+  // constructor (props) {
+  //   super(props)
+  // }
 }
 
-export default GainControl;
+export default GainControl
