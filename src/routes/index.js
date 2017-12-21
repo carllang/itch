@@ -2,7 +2,6 @@
 import CoreLayout from '../layouts/CoreLayout/CoreLayout'
 import Stage from './Stage'
 
-
 /*  Note: Instead of using JSX, we recommend using react-router
     PlainRoute objects to build route definitions.   */
 
@@ -10,9 +9,7 @@ export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
   indexRoute  : Stage,
-  childRoutes : [
-    //CounterRoute(store)
-  ]
+  childRoutes : []
 })
 
 /*  Note: childRoutes can be chunked or otherwise loaded programmatically
