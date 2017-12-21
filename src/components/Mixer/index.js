@@ -1,3 +1,3 @@
-import Mixer from './Mixer';
+import Mixer from './Mixer'
 
-export default Mixer;
+export default Mixer

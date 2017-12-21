@@ -1,3 +1,3 @@
-import Transport from './Transport';
+import Transport from './Transport'
 
-export default Transport;
+export default Transport
